@@ -653,6 +653,32 @@ details.faq[open] summary { border-bottom: 1px solid var(--grid); }
 
 details.faq .faq-body { padding: 12px 0 14px; color: var(--text-secondary); }
 
+/* ---------- QR de acceso ---------- */
+
+.qr-bloque {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.qr-marco {
+  /* Siempre fondo blanco y módulos oscuros: escaneable también en tema oscuro.
+     El padding hace de zona de silencio del QR. */
+  background: #ffffff;
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  flex: 0 0 auto;
+}
+
+.qr-marco img { display: block; width: 168px; height: 168px; }
+
+.qr-texto { max-width: 360px; }
+
+.qr-texto .enlace-app { font-weight: 600; word-break: break-all; }
+
 /* ---------- Pie ---------- */
 
 .site-footer {
@@ -677,3 +703,10 @@ details.faq .faq-body { padding: 12px 0 14px; color: var(--text-secondary); }
 }
 
 .solo-imprimir { display: none; }
+
+/* Imprimir únicamente el cartel del QR (botón "Imprimir QR" de la portada) */
+@media print {
+  body.solo-qr main > *:not(#acceso-qr) { display: none !important; }
+  body.solo-qr #acceso-qr { border: 0; }
+  body.solo-qr .qr-marco img { width: 300px; height: 300px; }
+}

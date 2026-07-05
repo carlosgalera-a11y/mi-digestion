@@ -60,6 +60,24 @@
     </a>
   </div>
 
+  <section class="card" id="acceso-qr" aria-labelledby="t-qr">
+    <h2 id="t-qr" style="margin-top:0;text-align:center">📱 Lleva la app en tu móvil</h2>
+    <div class="qr-bloque">
+      <div class="qr-marco">
+        <img src="img/qr-app.svg" alt="Código QR que abre la app Mi Digestión" width="168" height="168">
+      </div>
+      <div class="qr-texto">
+        <p>Apunta con la cámara de tu móvil a este código para abrir la app al instante,
+           o comparte el enlace con quien la necesite.</p>
+        <p class="enlace-app"><a href="https://carlosgalera-a11y.github.io/mi-digestion/">carlosgalera-a11y.github.io/mi-digestion</a></p>
+        <div class="acciones no-imprimir">
+          <button type="button" class="btn" id="btn-compartir">🔗 Compartir enlace</button>
+          <button type="button" class="btn" id="btn-imprimir-qr">🖨️ Imprimir el QR</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <div class="aviso info">
     <h3>🔒 Tus datos son tuyos</h3>
     Todo lo que registras se guarda <strong>solo en tu dispositivo</strong> (en este navegador).
@@ -76,8 +94,35 @@
 </main>
 
 <script type="module">
-  import { iniciarPagina } from "./js/ui.js";
+  import { iniciarPagina, avisar } from "./js/ui.js";
   iniciarPagina();
+
+  const URL_APP = "https://carlosgalera-a11y.github.io/mi-digestion/";
+
+  document.getElementById("btn-compartir").addEventListener("click", async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: "Mi Digestión",
+          text: "App para registrar tus síntomas digestivos y preparar tu consulta de digestivo.",
+          url: URL_APP
+        });
+      } catch { /* el usuario canceló el diálogo */ }
+    } else {
+      try {
+        await navigator.clipboard.writeText(URL_APP);
+        avisar("Enlace copiado al portapapeles ✓");
+      } catch {
+        avisar(URL_APP);
+      }
+    }
+  });
+
+  document.getElementById("btn-imprimir-qr").addEventListener("click", () => {
+    document.body.classList.add("solo-qr");
+    window.print();
+  });
+  window.addEventListener("afterprint", () => document.body.classList.remove("solo-qr"));
 </script>
 </body>
 </html>
