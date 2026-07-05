@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Historial e informe | Mi Digestión</title>
+<meta name="description" content="Evolución de tus síntomas digestivos e informe resumido para llevar a tu consulta de aparato digestivo.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<main>
+  <h1>Historial e informe</h1>
+  <p class="hint">Tu evolución de un vistazo y un informe listo para compartir con tu médico.</p>
+
+  <div class="card no-imprimir" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+    <span style="font-weight:600">Periodo</span>
+    <div class="seg" id="selector-periodo" role="radiogroup" aria-label="Periodo del historial">
+      <label><input type="radio" name="periodo" value="7">7 días</label>
+      <label><input type="radio" name="periodo" value="14">14 días</label>
+      <label><input type="radio" name="periodo" value="30" checked>30 días</label>
+      <label><input type="radio" name="periodo" value="90">90 días</label>
+    </div>
+  </div>
+
+  <div class="solo-imprimir card">
+    <h2 style="margin:0 0 4px">Mi Digestión — Diario de síntomas del paciente</h2>
+    <p id="informe-cabecera" style="margin:0"></p>
+  </div>
+
+  <section class="card" aria-labelledby="t-resumen">
+    <h2 id="t-resumen">Resumen del periodo <span id="titulo-periodo" class="hint" style="display:inline"></span></h2>
+    <div class="grid-stats" id="stats"></div>
+  </section>
+
+  <section class="card" aria-labelledby="t-graficos">
+    <h2 id="t-graficos">Evolución</h2>
+    <div class="grid-charts">
+      <div id="chart-dolor"></div>
+      <div id="chart-distension"></div>
+      <div id="chart-deposiciones"></div>
+      <div id="chart-bristol"></div>
+      <div id="chart-estres"></div>
+      <div id="chart-sueno"></div>
+    </div>
+  </section>
+
+  <section class="card" aria-labelledby="t-informe">
+    <h2 id="t-informe">Informe para la consulta</h2>
+    <p class="hint no-imprimir">Resumen en texto de tu periodo seleccionado. Imprímelo o guárdalo en PDF
+      (con el botón Imprimir) y llévalo a tu cita: ayuda a tu médico a ver tu evolución de forma objetiva.</p>
+    <div id="informe-texto" class="prosa"></div>
+    <div class="acciones no-imprimir">
+      <button type="button" class="btn primario" id="btn-imprimir">🖨️ Imprimir / guardar PDF</button>
+      <button type="button" class="btn" id="btn-csv">⬇️ Exportar CSV (Excel)</button>
+    </div>
+  </section>
+
+  <section class="card" aria-labelledby="t-tabla">
+    <h2 id="t-tabla">Registros del periodo</h2>
+    <div class="tabla-scroll">
+      <table id="tabla-registros">
+        <caption class="hint" style="text-align:left;caption-side:top">Un día por fila. Los mismos datos que muestran los gráficos.</caption>
+        <thead>
+          <tr>
+            <th scope="col">Fecha</th>
+            <th scope="col">Dolor (0-10)</th>
+            <th scope="col">Hinchazón</th>
+            <th scope="col">Deposiciones</th>
+            <th scope="col">Bristol</th>
+            <th scope="col">Estrés (1-5)</th>
+            <th scope="col">Sueño (h)</th>
+            <th scope="col">Cafeína</th>
+            <th scope="col">Alcohol</th>
+            <th scope="col">Tabaco</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="card no-imprimir" aria-labelledby="t-datos">
+    <h2 id="t-datos">Tus datos</h2>
+    <p class="hint">Todo se guarda solo en este dispositivo. Haz copias de seguridad si cambias de móvil u ordenador.</p>
+    <div class="acciones">
+      <button type="button" class="btn" id="btn-copia">💾 Descargar copia de seguridad</button>
+      <button type="button" class="btn" id="btn-restaurar">📂 Restaurar copia</button>
+      <input type="file" id="archivo-copia" accept="application/json,.json" hidden>
+      <button type="button" class="btn peligro" id="btn-borrar">🗑️ Borrar todos los registros</button>
+    </div>
+  </section>
+</main>
+
+<script type="module" src="js/historial.js"></script>
+</body>
+</html>

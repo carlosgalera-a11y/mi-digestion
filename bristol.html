@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Escala de Bristol | Mi Digestión</title>
+<meta name="description" content="La escala de Bristol clasifica las heces en 7 tipos. Aprende a identificar el tuyo para registrarlo en tu diario digestivo.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<main>
+  <h1>Escala de Bristol</h1>
+  <p class="hint" style="max-width:640px">
+    La escala de Bristol es la forma estándar de describir el aspecto de las heces, del tipo 1
+    (estreñimiento intenso) al tipo 7 (diarrea). Usarla en tu <a href="diario.html">registro diario</a>
+    le da a tu médico una información mucho más precisa que decir «voy mal al baño».
+  </p>
+
+  <section class="card">
+    <div class="bristol-grid" id="lista-bristol"></div>
+  </section>
+
+  <section class="card prosa">
+    <h2 style="margin-top:0">Cómo usarla bien</h2>
+    <ul>
+      <li><strong>Fíjate en cada deposición</strong>, no en “cómo vas en general”: el tipo puede cambiar a lo largo del día.</li>
+      <li><strong>Los tipos 3, 4 y 5</strong> se consideran dentro del rango normal; el 4 es el ideal.</li>
+      <li><strong>Tipos 1 y 2 mantenidos</strong> orientan a estreñimiento; <strong>6 y 7</strong>, a diarrea.</li>
+      <li>En el síndrome de intestino irritable es frecuente <strong>alternar</strong> entre tipos duros y blandos;
+        por eso registrar cada deposición es tan útil.</li>
+      <li>Anota también si hubo <strong>urgencia</strong> o <strong>sensación de evacuación incompleta</strong>:
+        son datos que tu médico valora para orientar el diagnóstico.</li>
+    </ul>
+    <div class="acciones">
+      <a class="btn primario" href="diario.html">📝 Registrar una deposición</a>
+    </div>
+  </section>
+
+  <div class="aviso alerta">
+    <h3>⚠️ Consulta sin esperar</h3>
+    Si ves <strong>sangre en las heces</strong>, heces negras como el alquitrán, o la diarrea o el estreñimiento
+    aparecen de forma brusca y persistente, no lo registres sin más: <a href="consulta.html#alarma">pide cita con tu médico</a>.
+  </div>
+</main>
+
+<script type="module">
+  import { iniciarPagina } from "./js/ui.js";
+  import { BRISTOL, GRUPOS, svgBristol } from "./js/bristol.js";
+
+  iniciarPagina();
+
+  document.getElementById("lista-bristol").innerHTML = BRISTOL.map((b) => `
+    <div class="bristol-item">
+      <div style="color:var(--accent);text-align:center">${svgBristol(b.tipo, 72)}</div>
+      <div>
+        <h3>Tipo ${b.tipo} · ${b.nombre}</h3>
+        <p>${b.descripcion}</p>
+        <p>${b.significado}</p>
+        <span class="bristol-tag ${b.grupo}">${GRUPOS[b.grupo]}</span>
+      </div>
+    </div>`).join("");
+</script>
+</body>
+</html>

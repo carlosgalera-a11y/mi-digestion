@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mi Día — Registro diario | Mi Digestión</title>
+<meta name="description" content="Registro diario de síntomas digestivos: dolor abdominal, distensión, ritmo deposicional, estilo de vida y hábitos.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<main>
+  <h1>Mi Día <span class="hint" style="display:block">Registro diario · se completa en menos de 2 minutos</span></h1>
+
+  <div class="card no-imprimir" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+    <label for="fecha" style="font-weight:600">Día que registras</label>
+    <input type="date" id="fecha">
+    <span id="estado-guardado" class="hint" style="margin:0" aria-live="polite"></span>
+  </div>
+
+  <form id="form-diario" novalidate>
+
+    <!-- ============ BLOQUE 1 ============ -->
+    <section class="card" aria-labelledby="t-bloque1">
+      <h2 class="bloque-titulo" id="t-bloque1"><span class="num">1</span> Síntomas digestivos</h2>
+      <p class="hint">Cómo ha estado hoy tu aparato digestivo.</p>
+
+      <fieldset>
+        <legend>Dolor abdominal (de 0 = sin dolor a 10 = dolor insoportable)</legend>
+        <div class="escala-caras" aria-hidden="true"><span>😀</span><span>🙂</span><span>😐</span><span>😣</span><span>😖</span><span>😫</span></div>
+        <div class="escala-dolor" role="radiogroup" aria-label="Intensidad del dolor de 0 a 10" id="grupo-dolor"></div>
+        <div class="escala-leyenda" aria-hidden="true"><span>Sin dolor</span><span>Insoportable</span></div>
+      </fieldset>
+
+      <fieldset id="campo-momento" hidden>
+        <legend>¿En qué momento notas el dolor?</legend>
+        <div class="seg">
+          <label><input type="radio" name="momento" value="ayunas">En ayunas</label>
+          <label><input type="radio" name="momento" value="despues">Después de comer</label>
+          <label><input type="radio" name="momento" value="continuo">Continuo</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Distensión abdominal (hinchazón)</legend>
+        <div class="seg">
+          <label><input type="radio" name="distension" value="0">Ninguna</label>
+          <label><input type="radio" name="distension" value="1">Leve</label>
+          <label><input type="radio" name="distension" value="2">Moderada</label>
+          <label><input type="radio" name="distension" value="3">Severa</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Ritmo deposicional</legend>
+        <p class="hint">Registra cada deposición del día con su tipo en la
+          <a href="bristol.html">escala de Bristol</a>.</p>
+
+        <div id="nueva-deposicion">
+          <span class="field-label">Tipo de heces (Bristol 1 a 7)</span>
+          <div class="bristol-selector" id="selector-bristol" role="radiogroup" aria-label="Tipo de heces según la escala de Bristol"></div>
+          <label class="check-linea"><input type="checkbox" id="dep-incompleta"> Sensación de evacuación incompleta</label>
+          <label class="check-linea"><input type="checkbox" id="dep-urgencia"> Urgencia evacuatoria (tener que correr al baño)</label>
+          <div class="acciones">
+            <button type="button" class="btn" id="btn-registrar-deposicion">➕ Registrar deposición</button>
+          </div>
+        </div>
+
+        <ul class="lista-deposiciones" id="lista-deposiciones" aria-live="polite"></ul>
+        <p class="hint" id="resumen-deposiciones"></p>
+      </fieldset>
+    </section>
+
+    <!-- ============ BLOQUE 2 ============ -->
+    <section class="card" aria-labelledby="t-bloque2">
+      <h2 class="bloque-titulo" id="t-bloque2"><span class="num">2</span> Estilo de vida y bienestar</h2>
+      <p class="hint">El eje cerebro-intestino: estrés, actividad y descanso influyen en tus síntomas.</p>
+
+      <fieldset>
+        <legend>Estrés de hoy: <span class="slider-valor" id="valor-estres">sin indicar</span></legend>
+        <input type="range" id="estres" min="1" max="5" step="1" value="3"
+               aria-describedby="leyenda-estres" list="marcas-estres">
+        <datalist id="marcas-estres"><option value="1"><option value="2"><option value="3"><option value="4"><option value="5"></datalist>
+        <div class="escala-leyenda" id="leyenda-estres"><span>Muy relajado/a</span><span>Muy estresado/a</span></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Actividad física</legend>
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <input type="number" id="actividad" min="0" max="1440" inputmode="numeric" style="width:110px" placeholder="0">
+          <span>minutos (ej.: 30 min de caminata)</span>
+        </div>
+        <p class="hint">Si usas Apple Health o Google Fit, puedes copiar aquí los minutos de actividad del día.</p>
+      </fieldset>
+
+      <fieldset>
+        <legend>Descanso</legend>
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px">
+          <input type="number" id="sueno-horas" min="0" max="24" step="0.5" inputmode="decimal" style="width:110px" placeholder="8">
+          <span>horas de sueño totales</span>
+        </div>
+        <div class="seg" role="radiogroup" aria-label="Calidad del descanso">
+          <label><input type="radio" name="calidad-sueno" value="mal">Mal descanso</label>
+          <label><input type="radio" name="calidad-sueno" value="regular">Regular</label>
+          <label><input type="radio" name="calidad-sueno" value="buen">Buen descanso</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>¿Cuánto te han preocupado tus síntomas hoy?</legend>
+        <div class="seg" role="radiogroup" aria-label="Preocupación por los síntomas, de 1 a 5">
+          <label><input type="radio" name="preocupacion" value="1">1 · Nada</label>
+          <label><input type="radio" name="preocupacion" value="2">2</label>
+          <label><input type="radio" name="preocupacion" value="3">3</label>
+          <label><input type="radio" name="preocupacion" value="4">4</label>
+          <label><input type="radio" name="preocupacion" value="5">5 · Mucho</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>¿Tus síntomas han limitado hoy tus actividades?</legend>
+        <div class="seg">
+          <label><input type="radio" name="limitacion" value="nada">Para nada</label>
+          <label><input type="radio" name="limitacion" value="poco">Un poco</label>
+          <label><input type="radio" name="limitacion" value="mucho">Mucho</label>
+        </div>
+      </fieldset>
+    </section>
+
+    <!-- ============ BLOQUE 3 ============ -->
+    <section class="card" aria-labelledby="t-bloque3">
+      <h2 class="bloque-titulo" id="t-bloque3"><span class="num">3</span> Consumo y hábitos</h2>
+      <p class="hint">Cafeína, alcohol, refrescos y tabaco pueden influir en el dolor y la hinchazón.</p>
+
+      <div class="fila-contador">
+        <span class="etiqueta">☕ Cafeína <span class="unidad">(tazas de café o té)</span></span>
+        <div class="contador" data-contador="cafeina">
+          <button type="button" data-paso="-1" aria-label="Quitar una taza">−</button>
+          <span class="valor" aria-live="polite">0</span>
+          <button type="button" data-paso="1" aria-label="Añadir una taza">+</button>
+        </div>
+      </div>
+
+      <div class="fila-contador">
+        <span class="etiqueta">🍷 Alcohol <span class="unidad">(copas)</span></span>
+        <div class="contador" data-contador="alcohol">
+          <button type="button" data-paso="-1" aria-label="Quitar una copa">−</button>
+          <span class="valor" aria-live="polite">0</span>
+          <button type="button" data-paso="1" aria-label="Añadir una copa">+</button>
+        </div>
+      </div>
+
+      <div class="fila-contador">
+        <span class="etiqueta">🥤 Refrescos <span class="unidad">(latas, sobre todo azucarados o con gas)</span></span>
+        <div class="contador" data-contador="refrescos">
+          <button type="button" data-paso="-1" aria-label="Quitar una lata">−</button>
+          <span class="valor" aria-live="polite">0</span>
+          <button type="button" data-paso="1" aria-label="Añadir una lata">+</button>
+        </div>
+      </div>
+
+      <fieldset style="margin-top:16px">
+        <legend>¿Crees que algo de lo que has comido hoy te ha sentado mal?</legend>
+        <div class="seg">
+          <label><input type="radio" name="comida-mal" value="si">Sí</label>
+          <label><input type="radio" name="comida-mal" value="no">No</label>
+        </div>
+        <div id="campo-comida" hidden style="margin-top:10px">
+          <label class="field-label" for="comida-detalle">¿Qué alimento o comida sospechas?</label>
+          <input type="text" id="comida-detalle" style="width:100%" placeholder="Ej.: legumbres, lácteos, comida copiosa…">
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Tabaco</legend>
+        <div class="seg">
+          <label><input type="radio" name="tabaco" value="no">No he fumado</label>
+          <label><input type="radio" name="tabaco" value="si">Sí he fumado</label>
+        </div>
+        <div id="campo-cigarrillos" hidden style="margin-top:10px;display:flex;align-items:center;gap:10px">
+          <input type="number" id="cigarrillos" min="0" max="200" inputmode="numeric" style="width:110px" placeholder="0">
+          <span>cigarrillos hoy</span>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Notas del día (opcional)</legend>
+        <textarea id="notas" rows="2" placeholder="Cualquier cosa que quieras contarle a tu médico sobre el día de hoy…"></textarea>
+      </fieldset>
+    </section>
+
+    <div class="acciones no-imprimir">
+      <button type="submit" class="btn primario">💾 Guardar el día</button>
+      <a class="btn" href="historial.html">Ver historial e informe</a>
+    </div>
+  </form>
+</main>
+
+<script type="module" src="js/diario.js"></script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mi Digestión — Tu compañero para la consulta de digestivo</title>
+<meta name="description" content="App para pacientes de consultas de aparato digestivo: registra tus síntomas (SII, dispepsia, motilidad), aprende sobre tu digestión y prepara mejor tu consulta.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<main>
+  <section class="card" style="text-align:center;padding:28px 18px">
+    <div style="font-size:2.6rem" aria-hidden="true">🌿</div>
+    <h1 style="margin:8px 0 6px">Mi Digestión</h1>
+    <p style="max-width:560px;margin:0 auto;color:var(--text-secondary)">
+      Un compañero para pacientes con <strong>síndrome de intestino irritable, dispepsia
+      o problemas de motilidad</strong>: registra tus síntomas cada día, entiende lo que te pasa
+      y llega a la consulta de digestivo con la información que tu médico necesita.
+    </p>
+    <div class="acciones" style="justify-content:center;margin-top:18px">
+      <a class="btn primario" href="diario.html">📝 Registrar mi día</a>
+      <a class="btn" href="historial.html">📈 Ver mi historial</a>
+    </div>
+  </section>
+
+  <div class="grid-tarjetas">
+    <a class="tarjeta-enlace" href="diario.html">
+      <span class="icono" aria-hidden="true">📝</span>
+      <h3>Mi Día — registro diario</h3>
+      <p>Menos de 2 minutos al día: dolor, hinchazón, deposiciones (escala de Bristol),
+         estrés, descanso y hábitos.</p>
+    </a>
+    <a class="tarjeta-enlace" href="historial.html">
+      <span class="icono" aria-hidden="true">📈</span>
+      <h3>Historial e informe</h3>
+      <p>Gráficos de tu evolución y un informe resumido que puedes imprimir o
+         exportar para llevar a la consulta.</p>
+    </a>
+    <a class="tarjeta-enlace" href="bristol.html">
+      <span class="icono" aria-hidden="true">💩</span>
+      <h3>Escala de Bristol</h3>
+      <p>Aprende a clasificar tus deposiciones del tipo 1 al 7 y qué significa cada uno.</p>
+    </a>
+    <a class="tarjeta-enlace" href="aprende.html">
+      <span class="icono" aria-hidden="true">📚</span>
+      <h3>Aprende sobre tu digestión</h3>
+      <p>SII, dispepsia funcional, motilidad y el eje cerebro-intestino,
+         explicados en lenguaje sencillo.</p>
+    </a>
+    <a class="tarjeta-enlace" href="consulta.html">
+      <span class="icono" aria-hidden="true">🩺</span>
+      <h3>Prepara tu consulta</h3>
+      <p>Qué llevar, qué contar, preguntas frecuentes y señales de alarma que no debes ignorar.</p>
+    </a>
+    <a class="tarjeta-enlace" href="aprende.html#habitos">
+      <span class="icono" aria-hidden="true">🧘</span>
+      <h3>Hábitos que ayudan</h3>
+      <p>Cafeína, alcohol, tabaco, sueño y estrés: cómo influyen en tus síntomas digestivos.</p>
+    </a>
+  </div>
+
+  <div class="aviso info">
+    <h3>🔒 Tus datos son tuyos</h3>
+    Todo lo que registras se guarda <strong>solo en tu dispositivo</strong> (en este navegador).
+    No se envía a internet ni a ningún servidor. Puedes exportar una copia o borrarlo cuando quieras
+    desde la página de <a href="historial.html">historial</a>.
+  </div>
+
+  <div class="aviso alerta">
+    <h3>⚠️ Importante</h3>
+    Esta herramienta ayuda a <strong>observar y comunicar</strong> tus síntomas, pero no diagnostica
+    ni sustituye a tu médico. Si tienes <a href="consulta.html#alarma">síntomas de alarma</a>
+    (sangrado, pérdida de peso sin causa, fiebre, dolor que despierta por la noche…), pide cita sin esperar.
+  </div>
+</main>
+
+<script type="module">
+  import { iniciarPagina } from "./js/ui.js";
+  iniciarPagina();
+</script>
+</body>
+</html>
