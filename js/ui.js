@@ -40,7 +40,8 @@ export function montarPie() {
   footer.innerHTML = `
     <p><strong>Mi Digestión</strong> es una herramienta de apoyo para pacientes de consultas de aparato digestivo.</p>
     <p>No sustituye la valoración de un profesional sanitario. Ante síntomas de alarma o dudas sobre tu salud,
-       consulta con tu médico. Tus registros se guardan únicamente en este dispositivo.</p>`;
+       consulta con tu médico. Tus registros se guardan únicamente en este dispositivo.</p>
+    <p style="margin-top:10px"><a href="acceso.html">🩺 Acceso profesionales</a></p>`;
   document.body.append(footer);
 }
 

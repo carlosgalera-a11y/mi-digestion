@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Megacuaderno de documentos | Mi Digestión</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<main>
+  <h1>Megacuaderno de documentos</h1>
+  <p class="hint">Sube documentos de la consulta (protocolos, guías, artículos, notas) y consúltalos.
+     Podrás hacer preguntas sobre su contenido.</p>
+
+  <section class="card">
+    <h2 style="margin-top:0">Subir documento</h2>
+    <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Subir documento">
+      <div class="icono-drop" aria-hidden="true">📄</div>
+      <p><strong>Arrastra un documento aquí</strong> o pulsa para elegirlo.</p>
+      <p class="hint">Se guarda de forma privada. Para las preguntas automáticas funcionan mejor los
+         archivos de texto (.txt, .md).</p>
+    </div>
+    <input type="file" id="input-doc" accept=".txt,.md,.csv,.json,.pdf,.doc,.docx,application/pdf,text/*" hidden>
+    <div id="subida-progreso" hidden>
+      <p class="hint" id="subida-texto"></p>
+      <div class="barra-progreso"><span id="subida-barra"></span></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2 style="margin-top:0">Documentos <span id="conteo" class="hint" style="display:inline"></span></h2>
+    <p class="hint" id="docs-vacio" hidden>Aún no has subido ningún documento.</p>
+    <ul class="lista-archivos" id="lista-docs"></ul>
+  </section>
+
+  <section class="card">
+    <h2 style="margin-top:0">Preguntar a los documentos</h2>
+    <p class="hint">Escribe una pregunta y la IA responderá usando el texto de tus documentos.
+       <span id="estado-ia"></span></p>
+    <div class="chat-doc">
+      <div class="chat-mensajes" id="chat" aria-live="polite"></div>
+      <form class="chat-entrada" id="form-chat">
+        <textarea id="pregunta" rows="2" placeholder="Ej.: ¿Qué dice el protocolo sobre la preparación para la colonoscopia?"></textarea>
+        <button type="submit" class="btn primario" id="btn-preguntar">Preguntar</button>
+      </form>
+    </div>
+  </section>
+
+  <div class="aviso info">
+    Las respuestas se basan en el texto de los documentos que subas y son de apoyo: revisa siempre las
+    fuentes originales. La IA no sustituye el criterio profesional.
+  </div>
+</main>
+
+<script src="js/vendor/supabase.js"></script>
+<script type="module" src="js/pro-documentos.js"></script>
+</body>
+</html>

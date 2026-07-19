@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gestión de accesos | Mi Digestión</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<main>
+  <h1>Gestión de accesos</h1>
+  <p class="hint">Añade o quita los correos de las personas que pueden entrar al área de profesionales.
+     Solo la superadministradora puede hacerlo.</p>
+
+  <section class="card">
+    <h2 style="margin-top:0">Añadir profesional</h2>
+    <form id="form-add">
+      <div style="display:grid;gap:10px;grid-template-columns:1fr">
+        <div>
+          <label class="field-label" for="add-email">Correo</label>
+          <input type="email" id="add-email" required style="width:100%" placeholder="nombre@ejemplo.com" inputmode="email">
+        </div>
+        <div>
+          <label class="field-label" for="add-nombre">Nombre (opcional)</label>
+          <input type="text" id="add-nombre" style="width:100%" placeholder="Dra. Ejemplo">
+        </div>
+        <fieldset style="margin:0">
+          <legend>Rol</legend>
+          <div class="seg">
+            <label><input type="radio" name="add-rol" value="profesional" checked> Profesional</label>
+            <label><input type="radio" name="add-rol" value="superadmin"> ⭐ Superadministradora</label>
+          </div>
+        </fieldset>
+      </div>
+      <div class="acciones">
+        <button type="submit" class="btn primario" id="btn-add">➕ Añadir acceso</button>
+      </div>
+    </form>
+  </section>
+
+  <section class="card">
+    <h2 style="margin-top:0">Profesionales con acceso <span id="conteo" class="hint" style="display:inline"></span></h2>
+    <div class="tabla-scroll">
+      <table id="tabla-accesos">
+        <thead>
+          <tr>
+            <th scope="col">Correo</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Rol</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <p class="hint" id="vacio" hidden>Todavía no hay profesionales en la lista.</p>
+  </section>
+
+  <div class="aviso info">
+    Cuando añades un correo, esa persona ya puede entrar en <a href="acceso.html">la página de acceso</a>
+    con ese correo (recibirá un enlace/código por email). Quitar un correo le retira el acceso de inmediato.
+  </div>
+</main>
+
+<script src="js/vendor/supabase.js"></script>
+<script type="module" src="js/pro-accesos.js"></script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Imágenes y modelo CAG | Mi Digestión</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<main>
+  <h1>Imágenes y modelo CAG</h1>
+  <p class="hint">Sube imágenes endoscópicas y compáralas con el modelo de detección de
+     <strong>gastritis atrófica crónica</strong> (CAG, DenseNet-121).</p>
+
+  <div class="aviso urgente">
+    <h3 style="margin-top:0">⚠️ Herramienta experimental, no diagnóstica</h3>
+    El resultado del modelo es <strong>orientativo</strong> y se basa en un modelo de investigación
+    entrenado con un conjunto limitado de imágenes. <strong>No es un diagnóstico</strong> ni un producto
+    sanitario validado. La decisión clínica corresponde siempre al profesional.
+  </div>
+
+  <section class="card">
+    <h2 style="margin-top:0">Subir imagen</h2>
+    <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Subir imagen">
+      <div class="icono-drop" aria-hidden="true">🖼️</div>
+      <p><strong>Arrastra una imagen aquí</strong> o pulsa para elegirla.</p>
+      <p class="hint">Formatos: JPG, PNG, BMP. Se guarda de forma privada en tu espacio de profesionales.</p>
+    </div>
+    <input type="file" id="input-imagen" accept="image/*" hidden>
+    <div id="subida-progreso" hidden>
+      <p class="hint" id="subida-texto"></p>
+      <div class="barra-progreso"><span id="subida-barra"></span></div>
+    </div>
+  </section>
+
+  <section class="card" id="analizador" hidden>
+    <h2 style="margin-top:0">Análisis y comparación</h2>
+    <div class="comparador">
+      <div class="comp-col">
+        <h3>Imagen del paciente</h3>
+        <img class="comp-img" id="img-paciente" alt="Imagen subida por el profesional">
+        <div class="acciones">
+          <button type="button" class="btn primario" id="btn-analizar">🔬 Analizar con el modelo</button>
+        </div>
+        <div id="resultado" aria-live="polite"></div>
+      </div>
+      <div class="comp-col">
+        <h3>Referencia del modelo</h3>
+        <div class="ref-galeria">
+          <figure>
+            <img src="modelo/ref/ejemplo-cag.jpg" alt="Ejemplo de imagen con gastritis atrófica crónica">
+            <figcaption>Ejemplo <strong>CAG</strong> (gastritis atrófica)</figcaption>
+          </figure>
+          <figure>
+            <img src="modelo/ref/ejemplo-sano.jpg" alt="Ejemplo de imagen sin gastritis atrófica">
+            <figcaption>Ejemplo <strong>sin CAG</strong></figcaption>
+          </figure>
+        </div>
+        <p class="hint">Compara visualmente la mucosa del paciente con los ejemplos de referencia del modelo.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2 style="margin-top:0">Mis imágenes</h2>
+    <p class="hint" id="galeria-vacia" hidden>Aún no has subido ninguna imagen.</p>
+    <div class="ref-galeria" id="galeria" style="grid-template-columns:repeat(auto-fill,minmax(120px,1fr))"></div>
+  </section>
+
+  <section class="card">
+    <h2 style="margin-top:0">Sobre el modelo CAG</h2>
+    <p class="hint">Modelo de investigación (DenseNet-121) de Yuan Fuqiang y el servicio de digestivo del
+       Shanxi Provincial People's Hospital, para la detección de gastritis atrófica crónica en imágenes
+       de antro gástrico. Rendimiento publicado por los autores: sensibilidad ≈ 95,9 %, especificidad ≈ 94 %.</p>
+    <div class="curvas-modelo">
+      <figure style="margin:0"><img src="modelo/ref/roc.png" alt="Curva ROC del modelo"><figcaption class="hint" style="text-align:center">Curva ROC</figcaption></figure>
+      <figure style="margin:0"><img src="modelo/ref/pr.png" alt="Curva precisión-exhaustividad"><figcaption class="hint" style="text-align:center">Curva P-R</figcaption></figure>
+      <figure style="margin:0"><img src="modelo/ref/acc.png" alt="Precisión de distintos modelos"><figcaption class="hint" style="text-align:center">Precisión por modelo</figcaption></figure>
+      <figure style="margin:0"><img src="modelo/ref/heatmap.png" alt="Mapa de calor de activación del modelo"><figcaption class="hint" style="text-align:center">Mapa de activación (CAM)</figcaption></figure>
+    </div>
+  </section>
+</main>
+
+<script src="js/vendor/supabase.js"></script>
+<script src="js/vendor/ort/ort.wasm.min.js"></script>
+<script type="module" src="js/pro-imagenes.js"></script>
+</body>
+</html>

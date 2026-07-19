@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Área de profesionales | Mi Digestión</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<main>
+  <h1>Área de profesionales</h1>
+  <p class="hint">Herramientas de apoyo para el profesional de la consulta de digestivo.</p>
+
+  <div class="grid-tarjetas">
+    <a class="tarjeta-enlace" href="pro-documentos.html">
+      <span class="icono" aria-hidden="true">📄</span>
+      <h3>Megacuaderno de documentos</h3>
+      <p>Sube documentos (protocolos, guías, artículos) y consúltalos. Podrás hacer preguntas
+         sobre su contenido.</p>
+    </a>
+    <a class="tarjeta-enlace" href="pro-imagenes.html">
+      <span class="icono" aria-hidden="true">🔬</span>
+      <h3>Imágenes y modelo CAG</h3>
+      <p>Sube imágenes endoscópicas y compáralas con el modelo de detección de gastritis
+         atrófica crónica (CAG).</p>
+    </a>
+    <a class="tarjeta-enlace" href="pro-accesos.html" id="tarjeta-accesos" hidden>
+      <span class="icono" aria-hidden="true">🔑</span>
+      <h3>Gestión de accesos</h3>
+      <p>Añade o quita los correos de los profesionales autorizados y asigna administradoras.
+         <strong>Solo superadministradora.</strong></p>
+    </a>
+  </div>
+
+  <div class="aviso alerta">
+    <h3>⚠️ Uso profesional y responsabilidad</h3>
+    Estas herramientas son de <strong>apoyo</strong> y no sustituyen el juicio clínico. La comparación
+    con el modelo CAG es orientativa y <strong>no constituye un diagnóstico</strong>. La responsabilidad
+    de cualquier decisión clínica recae en el profesional.
+  </div>
+</main>
+
+<script src="js/vendor/supabase.js"></script>
+<script type="module">
+  import { proteger } from "./js/pro.js";
+  const perfil = await proteger();
+  if (perfil && perfil.role === "superadmin") {
+    document.getElementById("tarjeta-accesos").hidden = false;
+  }
+</script>
+</body>
+</html>
