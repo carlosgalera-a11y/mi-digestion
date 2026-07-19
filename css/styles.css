@@ -840,6 +840,67 @@ details.faq .faq-body { padding: 12px 0 14px; color: var(--text-secondary); }
 .chat-entrada { display: flex; gap: 8px; align-items: flex-end; }
 .chat-entrada textarea { flex: 1; }
 
+/* ---------- PWA: banner de instalación ---------- */
+
+.pwa-banner {
+  position: fixed;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  max-width: 520px;
+  margin: 0 auto;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.22);
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 80;
+  transform: translateY(140%);
+  transition: transform 0.32s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.pwa-banner.visible { transform: translateY(0); }
+
+.pwa-banner-icono { width: 46px; height: 46px; border-radius: 12px; flex: 0 0 auto; }
+.pwa-banner-texto { flex: 1; font-size: 0.86rem; line-height: 1.35; min-width: 0; }
+.pwa-banner-texto span { color: var(--text-secondary); }
+.pwa-banner-acciones { display: flex; flex-direction: column; gap: 6px; flex: 0 0 auto; }
+.pwa-banner-acciones .btn { padding: 8px 14px; min-height: 38px; font-size: 0.9rem; }
+
+@media (min-width: 480px) {
+  .pwa-banner-acciones { flex-direction: row; }
+}
+
+/* ---------- PWA: carátula de instalación en la portada ---------- */
+
+.card-instalar {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-strong) 100%);
+  color: #fff;
+  border: 0;
+  border-radius: var(--radius);
+  padding: 22px 20px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  box-shadow: var(--shadow);
+}
+.card-instalar .caratula-icono {
+  width: 76px; height: 76px; border-radius: 18px; flex: 0 0 auto;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+}
+.card-instalar .caratula-texto { flex: 1; min-width: 200px; }
+.card-instalar h2 { margin: 0 0 4px; color: #fff; font-size: 1.15rem; }
+.card-instalar p { margin: 0; color: rgba(255, 255, 255, 0.9); font-size: 0.92rem; }
+.card-instalar .btn {
+  background: #fff; color: var(--accent-strong); border-color: #fff; font-weight: 700;
+}
+.card-instalar .btn:hover { background: #f0fdfa; }
+.card-instalar .caratula-cta { flex: 0 0 auto; }
+
 /* ---------- Pie ---------- */
 
 .site-footer {
